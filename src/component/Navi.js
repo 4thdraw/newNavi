@@ -10,20 +10,21 @@ import Scrollspy from 'react-scrollspy';
  function Navi() {
     const [ colorMode, updataColor ] = useState(true);
     const [ activenum , naviUpdate ] = useState(-1);
+    //하나의 번호만 가지게 되는 랜더링변수
 
-    // const boxs = document.querySelectorAll(".navilist a"); //li들
+   const naviActive = (e) => {                  
+        const navinodes = [...e.target.parentElement.parentElement.children];
+        //li들을 담아라
+        //index 번호 색출하기위함
+        console.log(navinodes.length);
+        //li총개수
 
-    // boxs.forEach(el => {
-    //   el.onclick = (e) => {
-    //     const nodes = [...e.target.parentElement.children];
-    
-    //     console.log(e.target.parentElement, nodes);
-    
-    //     const index = nodes.indexOf(e.target);
-    
-    //     console.log(index)
-    //   }
-    // });
+        const index = navinodes.indexOf(e.target.parentElement);// 타겟 li
+        console.log(index); // 그 li의 번호
+
+        naviUpdate(index);
+   }
+        
 
 
   return (
@@ -39,36 +40,17 @@ import Scrollspy from 'react-scrollspy';
             </Link>
         </h1>
         <Scrollspy className='d-flex'>
-            <li key='navi0' data-num={0} className={ 'navilist' }  >
-                <Link to="/" onClick={ 
-                    (e) => {
-
-                  
-                  const navinodes = [...e.target.parentElement.parentElement.children];
-                  //index 번호 색출하기위함
-                  console.log(navinodes.length);
-
-                  const index = navinodes.indexOf(e.target.parentElement);
-                  console.log(index)
-                  
-                         
-
-
-                          } }
-                >뇌새김소개</Link>
+            <li key='navi0'   className={ 'navilist' }  >
+                <a href="#top"   onClick={ naviActive  } >뇌새김소개</a>
             </li>
-            <li key='navi1' data-num={1} className={ 'navilist' }>
-                <a href='#faq' onClick={ 
-                    (e) => {
-                            console.log(e.target.parentNode.parentNode); //스펠링주의할것
-                             
-                          } }>뇌새김의 학습원리</a>
+            <li key='navi1'  className={ 'navilist' }>
+                <a href='#faq' onClick={ naviActive  } >뇌새김의 학습원리</a>
             </li>
-            <li key='navi2' data-num={2} className={ 'navilist' }>
-                <a href='#review'>뇌새김의 후기</a>
+            <li key='navi2'  className={ 'navilist' }>
+                <a href='#review' onClick={ naviActive  } >뇌새김의 후기</a>
             </li>
-            <li key='navi3' data-num={3} className={ 'navilist' }>
-                <a href='#qna'>문의하기</a>
+            <li key='navi3'  className={ 'navilist' }>
+                <a href='#qna' onClick={ naviActive  }>문의하기</a>
             </li>         
         </Scrollspy>
             <ul id="sns" className='d-flex'>
